@@ -2,17 +2,17 @@
 
 Bot Telegram nhận ảnh món ăn, dùng Gemini ước tính dinh dưỡng và lưu lịch sử bằng Supabase. Backend TypeScript chạy trên Vercel, không cần máy chủ chạy liên tục.
 
-## Giới hạn đăng nhập bằng Nginx
+## Giới hạn đăng nhập bằng Supabase
 
-Đã thêm gateway OpenResty/Nginx: **5 yêu cầu đăng nhập / 30 phút / IP**, cửa sổ trượt; vượt mức nhận `429` và `Retry-After`. Production yêu cầu `LOGIN_PROXY_SECRET` từ gateway, chặn gọi login trực tiếp qua domain Vercel. Các yêu cầu refresh, bot và cron không dùng quota này.
+Ứng dụng chạy trực tiếp trên Vercel và giới hạn **5 yêu cầu đăng nhập / 30 phút / IP** bằng một cửa sổ trượt atomic trong Supabase. Lần vượt mức nhận `429` và `Retry-After`; đăng nhập sai hoặc dữ liệu không hợp lệ vẫn dùng một lượt. Chỉ khóa HMAC của IP được lưu, không lưu IP thô. Các yêu cầu refresh, bot và cron không dùng quota này.
 
-Nginx cần chạy trên VPS/Docker riêng trước Vercel. Chuẩn bị proxy, TLS, DNS, đặt `APP_URL` thành domain public của gateway và secret giống nhau ở hai phía theo [hướng dẫn Nginx](infra/nginx/README.md). Chưa cấu hình gateway/secret thì login production trả `503`; local dev được chạy trực tiếp khi không khai báo secret. Vercel tiếp tục chạy backend; phần gateway mới là thành phần cần máy chủ liên tục.
+Chạy migration `004_login_rate_limit.sql` và đặt `LOGIN_RATE_LIMIT_SECRET` giống nhau ở mọi Vercel Function của cùng môi trường. Có thể cấu hình thêm Vercel Firewall/WAF làm lớp bảo vệ bên ngoài, nhưng ứng dụng không phụ thuộc vào lớp này để thực thi giới hạn.
 
 ## Web console: đăng nhập, thống kê và quản lý cấu hình
 
 ### Chọn Telegram hoặc Zalo Bot
 
-Chạy migration `003_zalo_channel.sql` **sau 001 và 002**, rồi deploy lại mã nguồn. Migration giữ các bot hiện có ở kênh Telegram và chuyển các ID hội thoại/tin nhắn cần thiết sang text để lưu nguyên vẹn ID Zalo; không xoá bữa ăn hay cấu hình cũ.
+Chạy migration `003_zalo_channel.sql` **sau 001 và 002**, rồi chạy `004_login_rate_limit.sql` trước khi deploy mã nguồn. Các migration không xoá bữa ăn hay cấu hình bot cũ.
 
 Trong **Bot & API → Thêm bot**, chọn **Kênh nhận ảnh: Telegram / Zalo Bot**. Mỗi kênh có Bot Token, User ID người gửi và Gemini key riêng; có thể thêm hai cấu hình để dùng song song. Kênh của cấu hình đã lưu không đổi được tại chỗ, để tránh chuyển nhầm lịch sử và webhook sang nền tảng khác.
 
@@ -33,7 +33,7 @@ Tham chiếu: [webhook nhận ảnh](https://docs.zaloplatforms.com/docs/BOT/web
 
 Ứng dụng có các trang `/login`, `/dashboard`, `/integrations`, `/users` (quản trị viên) và `/account`. Dashboard hiển thị kcal, số bữa, protein/carb/chất béo, biểu đồ 7/30/90 ngày, lọc theo bot, tổng từ đầu và số lượt gọi/token Gemini. Token API không được quy đổi thành chi phí tiền khi chưa có cấu hình giá. Các số liệu tổng hợp theo ngày vẫn giữ khi chi tiết bữa ăn chuyển sang archive.
 
-**Nâng cấp database:** chạy `002_web_console.sql` trong Supabase SQL Editor sau migration 001. Không chạy lại migration 001 trên database đã có bảng. Dữ liệu bot chung cũ vẫn hoạt động nếu giữ biến môi trường legacy; dữ liệu đó không tự động gán cho một tài khoản web bất kỳ. Dashboard bắt đầu thống kê từ các bot riêng được cấu hình trên web. Không có số liệu mẫu được đưa vào ứng dụng.
+**Nâng cấp database:** chạy lần lượt các migration còn thiếu theo số thứ tự, hiện tại là `002_web_console.sql`, `003_zalo_channel.sql`, rồi `004_login_rate_limit.sql`. Không chạy lại migration đã áp dụng trên database hiện có. Dữ liệu bot chung cũ vẫn hoạt động nếu giữ biến môi trường legacy; dữ liệu đó không tự động gán cho một tài khoản web bất kỳ.
 
 **Đăng nhập:** bật Supabase Auth Email/Password. Mặc định quản trị viên cấp tài khoản; tắt public signups trong Supabase Auth. Profile mới cũng bị chặn mặc định cho tới khi được cấp quyền, kể cả khi public signup vô tình bật. Tạo tài khoản quản trị đầu tiên bằng Supabase Dashboard → Authentication → Users → Add user (email đã xác nhận), rồi chạy lệnh dưới với đúng email:
 
@@ -89,7 +89,7 @@ Kiểm thử UI dùng Edge đã cài (`channel: msedge`) ở desktop/mobile và 
 
 Tạo bot bằng [@BotFather](https://t.me/BotFather), lấy Telegram bot token. Tạo Gemini API key trong [Google AI Studio](https://aistudio.google.com/). Tạo một project [Supabase](https://supabase.com/dashboard).
 
-Trong Supabase SQL Editor chạy toàn bộ [migration](supabase/migrations/001_initial.sql) **một lần**. Migration tạo bảng, RPC, index, RLS và hai private bucket `meal-images`, `meal-archives`. Backend dùng service role key (Settings → API); không đưa key này vào client hoặc git.
+Trong Supabase SQL Editor chạy các file trong `supabase/migrations` **một lần theo thứ tự 001 → 004**. Các migration tạo bảng, RPC, index, RLS và hai private bucket `meal-images`, `meal-archives`. Backend dùng service role key (Settings → API); không đưa key này vào client hoặc git.
 
 ### 2. Cấu hình biến môi trường
 
@@ -109,7 +109,8 @@ node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"
 | `SUPABASE_SERVICE_ROLE_KEY` | Service role key chỉ dùng phía server |
 | `CRON_SECRET` | Secret ngẫu nhiên ít nhất 32 ký tự; Vercel Cron dùng biến này để xác thực |
 | `ALLOWED_TELEGRAM_USER_IDS` | Tuỳ chọn: ID người dùng cách nhau bằng dấu phẩy; để trống cho phép mọi chat riêng |
-| `APP_URL` | Origin production, dùng cho web Auth/CSRF và đăng ký webhook |
+| `APP_URL` | Origin production trên Vercel, dùng cho web Auth/CSRF và đăng ký webhook |
+| `LOGIN_RATE_LIMIT_SECRET` | Secret URL-safe ít nhất 32 ký tự, dùng HMAC IP trước khi ghi bộ đếm đăng nhập vào Supabase |
 
 ### 3. Deploy lên Vercel
 

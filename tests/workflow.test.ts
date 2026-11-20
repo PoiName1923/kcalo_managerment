@@ -62,6 +62,7 @@ test('photo workflow saves once, retries Telegram without repeating Gemini, then
           prepare_archive: ['select prepare_archive() as value', []],
           finalize_archive: ['select finalize_archive($1,$2,$3) as value', [body.p_id, body.p_checksum, body.p_bytes]],
           prune_operational_data: ['select prune_operational_data() as value', []],
+          prune_login_attempts: ['select null as value', []],
         };
         const [query, args] = params[name!];
         const rows = (await sql.query<any>(query, args)).rows;

@@ -59,6 +59,7 @@ export async function maintain(db: Database) {
       archivedBatches++;
     }
     checked(await db.rpc('prune_operational_data'));
+    checked(await db.rpc('prune_login_attempts'));
     // Tenant tables are present when web-console encryption is configured.
     if(process.env.CREDENTIAL_ENCRYPTION_KEY) checked(await db.rpc('prune_bot_operational_data'));
     return { deletedImages, archivedBatches, imageErrors };

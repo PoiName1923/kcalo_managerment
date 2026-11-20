@@ -4,7 +4,7 @@ import { getConfig } from '../src/config.js';
 import { database,checked } from '../src/db.js';
 import { json,readBody,type ApiRequest } from '../src/http.js';
 import { authClient,cookies,HttpError,requireAccount,sameOrigin,sessionCookies,webError } from '../src/web-auth.js';
-import {requireLoginProxy} from '../src/login-proxy.js';
+import {clientKey,consumeLoginAttempt} from '../src/login-rate-limit.js';
 
 export default async function handler(req:ApiRequest,res:ServerResponse) {
   try {
@@ -12,7 +12,15 @@ export default async function handler(req:ApiRequest,res:ServerResponse) {
     if(req.method==='GET' && action==='me') return json(res,200,{account:await requireAccount(req,db)});
     if(req.method!=='POST') return json(res,405,{error:'Phương thức không được hỗ trợ.'});
     sameOrigin(req,config);
-    if(action==='login')requireLoginProxy(req,config.LOGIN_PROXY_SECRET);
+    if(action==='login'){
+      let admission;
+      try{admission=await consumeLoginAttempt(db,clientKey(req,config.LOGIN_RATE_LIMIT_SECRET??''));}
+      catch{throw new HttpError(503,'Giới hạn đăng nhập tạm thời chưa sẵn sàng. Vui lòng thử lại sau.');}
+      if(!admission.allowed){
+        res.setHeader('Retry-After',String(admission.retryAfter));
+        throw new HttpError(429,'Bạn đã dùng hết 5 lần đăng nhập trong 30 phút. Vui lòng thử lại sau.');
+      }
+    }
     if(action==='logout') {
       const token=cookies(req).calo_access;
       if(token) await db.auth.admin.signOut(token,'local').catch(()=>undefined);

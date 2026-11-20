@@ -9,7 +9,7 @@ public/fonts/
 test-results/
 playwright-report/
 .impeccable/review/
-infra/nginx/gateway.env
-infra/nginx/tls/
 docs/
+.impeccable/
 impeccable/
+.superpowers/
