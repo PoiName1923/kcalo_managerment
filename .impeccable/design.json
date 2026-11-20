@@ -1,0 +1,460 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-20T10:15:25.473Z",
+  "title": "Design System: Calo Ingest",
+  "extensions": {
+    "colorMeta": {
+      "pine": {
+        "role": "primary",
+        "displayName": "Pine",
+        "tonalRamp": [
+          "oklch(15.00% 0.0486 174.30)",
+          "oklch(26.43% 0.0486 174.30)",
+          "oklch(37.86% 0.0486 174.30)",
+          "oklch(49.29% 0.0486 174.30)",
+          "oklch(60.71% 0.0486 174.30)",
+          "oklch(72.14% 0.0486 174.30)",
+          "oklch(83.57% 0.0486 174.30)",
+          "oklch(95.00% 0.0486 174.30)"
+        ]
+      },
+      "green": {
+        "role": "primary",
+        "displayName": "Action Green",
+        "tonalRamp": [
+          "oklch(15.00% 0.0835 160.86)",
+          "oklch(26.43% 0.0835 160.86)",
+          "oklch(37.86% 0.0835 160.86)",
+          "oklch(49.29% 0.0835 160.86)",
+          "oklch(60.71% 0.0835 160.86)",
+          "oklch(72.14% 0.0835 160.86)",
+          "oklch(83.57% 0.0835 160.86)",
+          "oklch(95.00% 0.0835 160.86)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Leaf",
+        "tonalRamp": [
+          "oklch(15.00% 0.0256 163.82)",
+          "oklch(26.43% 0.0256 163.82)",
+          "oklch(37.86% 0.0256 163.82)",
+          "oklch(49.29% 0.0256 163.82)",
+          "oklch(60.71% 0.0256 163.82)",
+          "oklch(72.14% 0.0256 163.82)",
+          "oklch(83.57% 0.0256 163.82)",
+          "oklch(95.00% 0.0256 163.82)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Pale Divider",
+        "tonalRamp": [
+          "oklch(15.00% 0.0117 153.66)",
+          "oklch(26.43% 0.0117 153.66)",
+          "oklch(37.86% 0.0117 153.66)",
+          "oklch(49.29% 0.0117 153.66)",
+          "oklch(60.71% 0.0117 153.66)",
+          "oklch(72.14% 0.0117 153.66)",
+          "oklch(83.57% 0.0117 153.66)",
+          "oklch(95.00% 0.0117 153.66)"
+        ]
+      },
+      "mint": {
+        "role": "neutral",
+        "displayName": "Mint Hover",
+        "tonalRamp": [
+          "oklch(15.00% 0.0153 145.45)",
+          "oklch(26.43% 0.0153 145.45)",
+          "oklch(37.86% 0.0153 145.45)",
+          "oklch(49.29% 0.0153 145.45)",
+          "oklch(60.71% 0.0153 145.45)",
+          "oklch(72.14% 0.0153 145.45)",
+          "oklch(83.57% 0.0153 145.45)",
+          "oklch(95.00% 0.0153 145.45)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "White Work Surface",
+        "tonalRamp": [
+          "oklch(15.00% 0.0000 0)",
+          "oklch(26.43% 0.0000 0)",
+          "oklch(37.86% 0.0000 0)",
+          "oklch(49.29% 0.0000 0)",
+          "oklch(60.71% 0.0000 0)",
+          "oklch(72.14% 0.0000 0)",
+          "oklch(83.57% 0.0000 0)",
+          "oklch(95.00% 0.0000 0)"
+        ]
+      },
+      "danger": {
+        "role": "semantic",
+        "displayName": "Destructive Red",
+        "tonalRamp": [
+          "oklch(15.00% 0.1579 26.21)",
+          "oklch(26.43% 0.1579 26.21)",
+          "oklch(37.86% 0.1579 26.21)",
+          "oklch(49.29% 0.1579 26.21)",
+          "oklch(60.71% 0.1579 26.21)",
+          "oklch(72.14% 0.1579 26.21)",
+          "oklch(83.57% 0.1579 26.21)",
+          "oklch(95.00% 0.1579 26.21)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Deep Leaf Ink",
+        "tonalRamp": [
+          "oklch(15.00% 0.0295 167.59)",
+          "oklch(26.43% 0.0295 167.59)",
+          "oklch(37.86% 0.0295 167.59)",
+          "oklch(49.29% 0.0295 167.59)",
+          "oklch(60.71% 0.0295 167.59)",
+          "oklch(72.14% 0.0295 167.59)",
+          "oklch(83.57% 0.0295 167.59)",
+          "oklch(95.00% 0.0295 167.59)"
+        ]
+      },
+      "canvas": {
+        "role": "neutral",
+        "displayName": "Ledger Canvas",
+        "tonalRamp": [
+          "oklch(15.00% 0.0041 157.18)",
+          "oklch(26.43% 0.0041 157.18)",
+          "oklch(37.86% 0.0041 157.18)",
+          "oklch(49.29% 0.0041 157.18)",
+          "oklch(60.71% 0.0041 157.18)",
+          "oklch(72.14% 0.0041 157.18)",
+          "oklch(83.57% 0.0041 157.18)",
+          "oklch(95.00% 0.0041 157.18)"
+        ]
+      },
+      "field-border": {
+        "role": "neutral",
+        "displayName": "Field Border",
+        "tonalRamp": [
+          "oklch(15.00% 0.0195 152.77)",
+          "oklch(26.43% 0.0195 152.77)",
+          "oklch(37.86% 0.0195 152.77)",
+          "oklch(49.29% 0.0195 152.77)",
+          "oklch(60.71% 0.0195 152.77)",
+          "oklch(72.14% 0.0195 152.77)",
+          "oklch(83.57% 0.0195 152.77)",
+          "oklch(95.00% 0.0195 152.77)"
+        ]
+      },
+      "primary-hover": {
+        "role": "primary",
+        "displayName": "Pine Hover",
+        "tonalRamp": [
+          "oklch(15.00% 0.0698 166.37)",
+          "oklch(26.43% 0.0698 166.37)",
+          "oklch(37.86% 0.0698 166.37)",
+          "oklch(49.29% 0.0698 166.37)",
+          "oklch(60.71% 0.0698 166.37)",
+          "oklch(72.14% 0.0698 166.37)",
+          "oklch(83.57% 0.0698 166.37)",
+          "oklch(95.00% 0.0698 166.37)"
+        ]
+      },
+      "secondary-border": {
+        "role": "neutral",
+        "displayName": "Secondary Border",
+        "tonalRamp": [
+          "oklch(15.00% 0.0211 156.76)",
+          "oklch(26.43% 0.0211 156.76)",
+          "oklch(37.86% 0.0211 156.76)",
+          "oklch(49.29% 0.0211 156.76)",
+          "oklch(60.71% 0.0211 156.76)",
+          "oklch(72.14% 0.0211 156.76)",
+          "oklch(83.57% 0.0211 156.76)",
+          "oklch(95.00% 0.0211 156.76)"
+        ]
+      },
+      "quiet-hover": {
+        "role": "neutral",
+        "displayName": "Quiet Hover",
+        "tonalRamp": [
+          "oklch(15.00% 0.0083 157.09)",
+          "oklch(26.43% 0.0083 157.09)",
+          "oklch(37.86% 0.0083 157.09)",
+          "oklch(49.29% 0.0083 157.09)",
+          "oklch(60.71% 0.0083 157.09)",
+          "oklch(72.14% 0.0083 157.09)",
+          "oklch(83.57% 0.0083 157.09)",
+          "oklch(95.00% 0.0083 157.09)"
+        ]
+      },
+      "nav-text": {
+        "role": "neutral",
+        "displayName": "Rail Text",
+        "tonalRamp": [
+          "oklch(15.00% 0.0244 159.08)",
+          "oklch(26.43% 0.0244 159.08)",
+          "oklch(37.86% 0.0244 159.08)",
+          "oklch(49.29% 0.0244 159.08)",
+          "oklch(60.71% 0.0244 159.08)",
+          "oklch(72.14% 0.0244 159.08)",
+          "oklch(83.57% 0.0244 159.08)",
+          "oklch(95.00% 0.0244 159.08)"
+        ]
+      },
+      "nav-hover": {
+        "role": "neutral",
+        "displayName": "Rail Hover",
+        "tonalRamp": [
+          "oklch(15.00% 0.0533 171.41)",
+          "oklch(26.43% 0.0533 171.41)",
+          "oklch(37.86% 0.0533 171.41)",
+          "oklch(49.29% 0.0533 171.41)",
+          "oklch(60.71% 0.0533 171.41)",
+          "oklch(72.14% 0.0533 171.41)",
+          "oklch(83.57% 0.0533 171.41)",
+          "oklch(95.00% 0.0533 171.41)"
+        ]
+      },
+      "nav-current": {
+        "role": "neutral",
+        "displayName": "Current Route",
+        "tonalRamp": [
+          "oklch(15.00% 0.0582 161.98)",
+          "oklch(26.43% 0.0582 161.98)",
+          "oklch(37.86% 0.0582 161.98)",
+          "oklch(49.29% 0.0582 161.98)",
+          "oklch(60.71% 0.0582 161.98)",
+          "oklch(72.14% 0.0582 161.98)",
+          "oklch(83.57% 0.0582 161.98)",
+          "oklch(95.00% 0.0582 161.98)"
+        ]
+      },
+      "status-positive-bg": {
+        "role": "semantic",
+        "displayName": "Positive Surface",
+        "tonalRamp": [
+          "oklch(15.00% 0.0157 139.44)",
+          "oklch(26.43% 0.0157 139.44)",
+          "oklch(37.86% 0.0157 139.44)",
+          "oklch(49.29% 0.0157 139.44)",
+          "oklch(60.71% 0.0157 139.44)",
+          "oklch(72.14% 0.0157 139.44)",
+          "oklch(83.57% 0.0157 139.44)",
+          "oklch(95.00% 0.0157 139.44)"
+        ]
+      },
+      "status-positive-text": {
+        "role": "semantic",
+        "displayName": "Positive Text",
+        "tonalRamp": [
+          "oklch(15.00% 0.0669 154.23)",
+          "oklch(26.43% 0.0669 154.23)",
+          "oklch(37.86% 0.0669 154.23)",
+          "oklch(49.29% 0.0669 154.23)",
+          "oklch(60.71% 0.0669 154.23)",
+          "oklch(72.14% 0.0669 154.23)",
+          "oklch(83.57% 0.0669 154.23)",
+          "oklch(95.00% 0.0669 154.23)"
+        ]
+      },
+      "status-paused-bg": {
+        "role": "semantic",
+        "displayName": "Paused Surface",
+        "tonalRamp": [
+          "oklch(15.00% 0.0176 81.33)",
+          "oklch(26.43% 0.0176 81.33)",
+          "oklch(37.86% 0.0176 81.33)",
+          "oklch(49.29% 0.0176 81.33)",
+          "oklch(60.71% 0.0176 81.33)",
+          "oklch(72.14% 0.0176 81.33)",
+          "oklch(83.57% 0.0176 81.33)",
+          "oklch(95.00% 0.0176 81.33)"
+        ]
+      },
+      "status-paused-text": {
+        "role": "semantic",
+        "displayName": "Paused Text",
+        "tonalRamp": [
+          "oklch(15.00% 0.0588 77.15)",
+          "oklch(26.43% 0.0588 77.15)",
+          "oklch(37.86% 0.0588 77.15)",
+          "oklch(49.29% 0.0588 77.15)",
+          "oklch(60.71% 0.0588 77.15)",
+          "oklch(72.14% 0.0588 77.15)",
+          "oklch(83.57% 0.0588 77.15)",
+          "oklch(95.00% 0.0588 77.15)"
+        ]
+      },
+      "status-neutral-bg": {
+        "role": "semantic",
+        "displayName": "Neutral Status Surface",
+        "tonalRamp": [
+          "oklch(15.00% 0.0068 145.52)",
+          "oklch(26.43% 0.0068 145.52)",
+          "oklch(37.86% 0.0068 145.52)",
+          "oklch(49.29% 0.0068 145.52)",
+          "oklch(60.71% 0.0068 145.52)",
+          "oklch(72.14% 0.0068 145.52)",
+          "oklch(83.57% 0.0068 145.52)",
+          "oklch(95.00% 0.0068 145.52)"
+        ]
+      },
+      "status-neutral-text": {
+        "role": "semantic",
+        "displayName": "Neutral Status Text",
+        "tonalRamp": [
+          "oklch(15.00% 0.0237 160.88)",
+          "oklch(26.43% 0.0237 160.88)",
+          "oklch(37.86% 0.0237 160.88)",
+          "oklch(49.29% 0.0237 160.88)",
+          "oklch(60.71% 0.0237 160.88)",
+          "oklch(72.14% 0.0237 160.88)",
+          "oklch(83.57% 0.0237 160.88)",
+          "oklch(95.00% 0.0237 160.88)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "headline": {
+        "displayName": "Page Headline",
+        "purpose": "Page identity with responsive sizing."
+      },
+      "title": {
+        "displayName": "Section Title",
+        "purpose": "Panel and form section headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Vietnamese explanatory copy."
+      },
+      "label": {
+        "displayName": "Action and Field Label",
+        "purpose": "Semibold labels for controls and actions."
+      }
+    },
+    "shadows": [
+      {
+        "name": "toast",
+        "value": "0 8px 28px #173f3526",
+        "purpose": "Separate transient feedback from the work surface."
+      }
+    ],
+    "motion": [
+      {
+        "name": "button-color",
+        "value": "background .16s, color .16s",
+        "purpose": "Button hover feedback; disabled with reduced motion."
+      },
+      {
+        "name": "desktop-arrival",
+        "value": "arrive .3s cubic-bezier(.16,1,.3,1)",
+        "purpose": "Content reveal at desktop widths, disabled with reduced motion."
+      },
+      {
+        "name": "loading-spin",
+        "value": "spin 1s linear infinite",
+        "purpose": "Loading indicator; disabled with reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "desktop-arrival-min",
+        "value": "1000px"
+      },
+      {
+        "name": "compact-max",
+        "value": "1180px"
+      },
+      {
+        "name": "mobile-max",
+        "value": "760px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Submit a form or begin a primary action.",
+      "html": "<button class=\"ds-btn ds-primary\" type=\"button\">Lưu cấu hình</button>",
+      "css": ".ds-btn{min-height:44px;border-radius:8px;padding:10px 18px;display:inline-flex;align-items:center;justify-content:center;gap:9px;font:600 .875rem 'Be Vietnam',system-ui,sans-serif;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:background .16s,color .16s}.ds-btn:focus-visible{outline:3px solid #548b58;outline-offset:4px}.ds-btn:disabled{cursor:wait;opacity:.55}@media(max-width:760px){.ds-btn{min-height:46px}}@media(prefers-reduced-motion:reduce){.ds-btn{transition:none}}.ds-primary{background:var(--pine,#173f35);color:var(--surface,#fff)}.ds-primary:hover{background:#28614c}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "A bordered supporting action.",
+      "html": "<button class=\"ds-btn ds-secondary\" type=\"button\">Chỉnh sửa</button>",
+      "css": ".ds-btn{min-height:44px;border-radius:8px;padding:10px 18px;display:inline-flex;align-items:center;justify-content:center;gap:9px;font:600 .875rem 'Be Vietnam',system-ui,sans-serif;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:background .16s,color .16s}.ds-btn:focus-visible{outline:3px solid #548b58;outline-offset:4px}.ds-btn:disabled{cursor:wait;opacity:.55}@media(max-width:760px){.ds-btn{min-height:46px}}@media(prefers-reduced-motion:reduce){.ds-btn{transition:none}}.ds-secondary{background:var(--surface,#fff);border-color:#cad9cf;color:var(--pine,#173f35)}.ds-secondary:hover{background:var(--mint,#e8f1e8)}"
+    },
+    {
+      "name": "Quiet Button",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "A low-emphasis utility action.",
+      "html": "<button class=\"ds-btn ds-quiet\" type=\"button\">Kiểm tra API</button>",
+      "css": ".ds-btn{min-height:44px;border-radius:8px;padding:10px 18px;display:inline-flex;align-items:center;justify-content:center;gap:9px;font:600 .875rem 'Be Vietnam',system-ui,sans-serif;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:background .16s,color .16s}.ds-btn:focus-visible{outline:3px solid #548b58;outline-offset:4px}.ds-btn:disabled{cursor:wait;opacity:.55}@media(max-width:760px){.ds-btn{min-height:46px}}@media(prefers-reduced-motion:reduce){.ds-btn{transition:none}}.ds-quiet{background:transparent;color:var(--muted,#607269);padding:8px 10px}.ds-quiet:hover{background:#edf3ef;color:var(--pine,#173f35)}"
+    },
+    {
+      "name": "Labeled Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "A visible label, editable value, and supporting hint.",
+      "html": "<label class=\"ds-field\">Tên gợi nhớ<input name=\"name\" placeholder=\"Ví dụ: Nhật ký của tôi\"><small>Tên giúp bạn nhận biết bot đã kết nối.</small></label>",
+      "css": ".ds-field{display:flex;flex-direction:column;gap:9px;margin-bottom:20px;font:600 .875rem 'Be Vietnam',system-ui,sans-serif;color:#23372f}.ds-field input{min-height:46px;border:1px solid #cbd8ce;border-radius:8px;background:var(--surface,#fff);color:#23372f;padding:11px 13px;width:100%;font:400 .9rem 'Be Vietnam',system-ui,sans-serif;caret-color:var(--green,#286a4c)}.ds-field input::placeholder{color:var(--muted,#607269);opacity:1}.ds-field input:focus{border-color:var(--green,#286a4c)}.ds-field input:focus-visible{outline:3px solid #548b58;outline-offset:4px}.ds-field small{font-size:.82rem;line-height:1.65;font-weight:400;color:var(--muted,#607269)}"
+    },
+    {
+      "name": "Rail Navigation",
+      "kind": "nav",
+      "refersTo": "nav-item",
+      "description": "Icon and text routes with a filled current state; two columns on mobile.",
+      "html": "<div class=\"ds-rail\"><nav class=\"ds-nav\" aria-label=\"Điều hướng chính\"><a href=\"/dashboard\" aria-current=\"page\"><svg aria-hidden=\"true\" viewBox=\"0 0 24 24\"><rect x=\"3\" y=\"3\" width=\"7\" height=\"7\" rx=\"1.5\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"11\" rx=\"1.5\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\" rx=\"1.5\"/><rect x=\"14\" y=\"18\" width=\"7\" height=\"3\" rx=\"1\"/></svg>Tổng quan</a><a href=\"/integrations\"><svg aria-hidden=\"true\" viewBox=\"0 0 24 24\"><rect x=\"4\" y=\"7\" width=\"16\" height=\"13\" rx=\"4\"/><path d=\"M12 3v4M2 12v4m20-4v4m-14-4h1m6 0h1m-7 4h6\"/></svg>Bot &amp; API</a><a href=\"/users\"><svg aria-hidden=\"true\" viewBox=\"0 0 24 24\"><path d=\"M3 21v-2a6 6 0 0 1 12 0v2m2-14a4 4 0 0 1 0 8m1 3a5 5 0 0 1 3 3\"/><circle cx=\"9\" cy=\"7\" r=\"4\"/></svg>Người dùng</a><a href=\"/account\"><svg aria-hidden=\"true\" viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"8\" r=\"4\"/><path d=\"M4 21a8 8 0 0 1 16 0\"/></svg>Tài khoản</a></nav></div>",
+      "css": ".ds-rail{background:var(--pine,#173f35);color:var(--surface,#fff);padding:22px;font-family:'Be Vietnam',system-ui,sans-serif}.ds-nav{display:flex;flex-direction:column;gap:8px}.ds-nav a{display:flex;align-items:center;gap:13px;padding:13px 15px;border-radius:8px;color:#cadcd1;text-decoration:none;font-size:.9rem;min-height:48px}.ds-nav a:hover{background:#244f42;color:white}.ds-nav a[aria-current=page]{background:#315b47;color:white}.ds-nav a:focus-visible{outline:3px solid #d4e8c4;outline-offset:4px}.ds-nav svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}@media(max-width:760px){.ds-nav{display:grid;grid-template-columns:1fr 1fr;gap:4px}.ds-nav a{padding:10px 12px;font-size:.78rem;gap:8px;white-space:nowrap;min-height:42px}.ds-nav svg{width:18px;height:18px}}"
+    },
+    {
+      "name": "Status Labels",
+      "kind": "chip",
+      "refersTo": "status-positive",
+      "description": "Text and tone communicate active, paused, and neutral status.",
+      "html": "<div class=\"ds-statuses\"><span class=\"ds-badge\">Đang hoạt động</span><span class=\"ds-badge ds-paused\">Đã tạm dừng</span><span class=\"ds-badge ds-neutral\">Chưa rõ</span></div>",
+      "css": ".ds-statuses{display:flex;gap:12px;flex-wrap:wrap}.ds-badge{display:inline-flex;align-items:center;padding:4px 9px;border-radius:5px;background:#eaf2e8;color:#356044;font:400 .72rem 'Be Vietnam',system-ui,sans-serif;white-space:nowrap}.ds-paused{color:#715a37;background:#f5eee2}.ds-neutral{color:#617168;background:#edf1ed}"
+    },
+    {
+      "name": "Work Panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "A flat bordered group for records, forms, or charts.",
+      "html": "<section class=\"ds-panel\"><div class=\"ds-panel-head\"><div><h2>Những bữa ăn gần đây</h2><p>Chi tiết được giữ 30 ngày trước khi chuyển sang archive.</p></div></div><div class=\"ds-empty\">Chưa có bữa ăn gần đây.</div></section>",
+      "css": ".ds-panel{border:1px solid var(--line,#e0e8e2);border-radius:12px;background:var(--surface,#fff);padding:26px;min-width:0;font-family:'Be Vietnam',system-ui,sans-serif;color:#23372f}.ds-panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:22px}.ds-panel h2{margin:0;font-size:1.1rem;font-weight:600;letter-spacing:-.02em}.ds-panel p{font-size:.8rem;color:var(--muted,#607269);margin:7px 0 0;line-height:1.8}.ds-empty{text-align:center;padding:42px 22px;color:var(--muted,#607269);line-height:1.8;font-size:.875rem}@media(max-width:1180px){.ds-panel{padding:22px}}@media(max-width:760px){.ds-panel{padding:22px 20px}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Vietnamese nutrition ledger",
+    "overview": "The shipped Operate-mode interface organizes recorded meals, nutrition totals, and personal bot connections into a calm working ledger. A pine navigation rail anchors white work surfaces; compact labels and aligned figures keep attention on the records.\n\nThis document describes the implemented system in `public/app.css` and `public/app.js`; its language records the chosen direction, without asserting additional user preferences.",
+    "keyCharacteristics": [
+      "Pine navigation, white surfaces, restrained green emphasis.",
+      "Vietnamese text, clear form labels, tabular nutrition figures.",
+      "Responsive records, honest empty states, visible operational status."
+    ],
+    "rules": [
+      {
+        "name": "The Status Label Rule",
+        "body": "Pair every status color with readable status text.",
+        "section": "colors"
+      },
+      {
+        "name": "The Numeric Alignment Rule",
+        "body": "Use tabular numerals and right alignment for comparable table values; keep units visible.",
+        "section": "typography"
+      }
+    ],
+    "dos": [
+      "**Do** reuse the pine rail, white bordered work surfaces, and Be Vietnam typography.",
+      "**Do** preserve Vietnamese labels, visible units, keyboard focus, and responsive table scrolling."
+    ],
+    "donts": [
+      "**Don't** present fabricated nutrition values as recorded meals.",
+      "**Don't** use color alone to communicate status or estimate confidence."
+    ]
+  }
+}

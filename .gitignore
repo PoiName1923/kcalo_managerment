@@ -1,0 +1,15 @@
+node_modules/
+.env
+.env.*
+!.env.example
+.vercel/
+coverage/
+dist/
+public/fonts/
+test-results/
+playwright-report/
+.impeccable/review/
+infra/nginx/gateway.env
+infra/nginx/tls/
+docs/
+impeccable/
