@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { getConfig, type Config } from './config.js';
 import { checked, database, type Database } from './db.js';
 import { json, type ApiRequest } from './http.js';
+import { logError } from './logging.js';
 
 export class HttpError extends Error { constructor(public status: number, message: string) { super(message); } }
 export function cookies(req: ApiRequest): Record<string,string> {
@@ -53,8 +54,9 @@ export async function webRoute(req: ApiRequest,res: ServerResponse,methods: stri
   } catch(error) { return webError(res,error); }
 }
 export function webError(res:ServerResponse,error:unknown) {
-  if (error instanceof HttpError) return json(res,error.status,{error:error.message});
+  const requestId = logError('web_request_failed', error);
+  res.setHeader('X-Request-Id', requestId);
+  if (error instanceof HttpError) return json(res,error.status,{error:error.message, code:'HTTP_ERROR',requestId});
   if (error instanceof z.ZodError) return json(res,400,{error:'Thông tin không hợp lệ. Hãy kiểm tra các trường và thử lại.'});
-  console.error('web_request_failed');
   return json(res,503,{error:'Không thể hoàn tất yêu cầu. Vui lòng thử lại sau.'});
 }

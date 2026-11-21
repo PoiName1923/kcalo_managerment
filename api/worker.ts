@@ -4,6 +4,7 @@ import { database } from '../src/db.js';
 import { json, type ApiRequest } from '../src/http.js';
 import { authorized } from '../src/security.js';
 import { drainJobs } from '../src/worker.js';
+import { logError } from '../src/logging.js';
 
 export default async function handler(req: ApiRequest, res: ServerResponse) {
   if (req.method !== 'POST') return json(res, 405, { error: 'Method not allowed' });
@@ -11,5 +12,5 @@ export default async function handler(req: ApiRequest, res: ServerResponse) {
     const config = getConfig();
     if (!authorized(req.headers.authorization, `Bearer ${config.CRON_SECRET}`)) return json(res, 401, { error: 'Unauthorized' });
     return json(res, 200, await drainJobs(database(config), config));
-  } catch { console.error('worker_failed'); return json(res, 503, { error: 'Worker failed' }); }
+  } catch(error) { const requestId=logError('worker_failed',error); return json(res, 503, { error: 'Worker failed',code:'WORKER_ERROR',requestId }); }
 }
