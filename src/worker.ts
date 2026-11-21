@@ -7,6 +7,7 @@ import { prepareImages } from './images.js';
 import { Telegram } from './telegram.js';
 import { decryptSecret } from './credentials.js';
 import { channelBot,type ChatBot } from './channel.js';
+import { logError } from './logging.js';
 
 interface Job {
   id?:string; bot_id?:string;
@@ -115,9 +116,9 @@ async function drainLegacyJobs(db: Database, config: Config, updateId?: number) 
       await processJob(job, db, config, bot);
       checked(await db.rpc('finish_job', { p_update_id: job.update_id, p_token: job.lease_token, p_success: true }));
       processed++;
-    } catch {
+    } catch(error) {
+      logError('job_failed',error,{update_id:job.update_id,attempt:job.attempts});
       checked(await db.rpc('finish_job', { p_update_id: job.update_id, p_token: job.lease_token, p_success: false }));
-      console.error('job_failed', { update_id: job.update_id, attempt: job.attempts });
     }
   }
   return { processed };
@@ -138,9 +139,9 @@ export async function drainBotJobs(db:Database,config:Config,jobId?:string) {
       await processJob(job,db,runtime,channelBot(integration.provider??'telegram',runtime.TELEGRAM_BOT_TOKEN));
       checked(await db.rpc('finish_bot_job',{p_job_id:job.id,p_token:job.lease_token,p_success:true}));
       processed++;
-    } catch {
+    } catch(error) {
+      logError('bot_job_failed',error,{job_id:job.id,attempt:job.attempts});
       checked(await db.rpc('finish_bot_job',{p_job_id:job.id,p_token:job.lease_token,p_success:false}));
-      console.error('bot_job_failed',{job_id:job.id,attempt:job.attempts});
     }
   }
   return {processed};

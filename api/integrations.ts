@@ -37,9 +37,17 @@ export default async function handler(req:ApiRequest,res:ServerResponse) {
       }
       if(action==='test') {
         await messenger.call('getMe',{});
-        const response=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${bot.gemini_model}`,{
-          headers:{'x-goog-api-key':decryptSecret(bot.gemini_ciphertext,master,id)},signal:AbortSignal.timeout(15000),
+        const response=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${bot.gemini_model}:generateContent`,{
+          method:'POST',
+          body:JSON.stringify({contents:[{role:'user',parts:[{text:'Reply with OK.'}]}],generationConfig:{maxOutputTokens:64}}),
+          headers:{'Content-Type':'application/json','x-goog-api-key':decryptSecret(bot.gemini_ciphertext,master,id)},signal:AbortSignal.timeout(30000),
         });
+        if(!response.ok) {
+          const reason=response.status===429?'Gemini hết quota hoặc đang giới hạn tốc độ.':response.status===404?'Không tìm thấy Gemini model đã chọn.':response.status===401||response.status===403?'Gemini API key không hợp lệ hoặc không có quyền dùng model.':`Gemini ping thất bại (HTTP ${response.status}).`;
+          throw new HttpError(400,reason);
+        }
+        const ping=await response.json() as {candidates?:{content?:{parts?:{text?:string;thought?:boolean}[]}}[]};
+        if(!ping.candidates?.some(c=>c.content?.parts?.some(p=>!p.thought&&p.text?.trim()))) throw new HttpError(400,'Gemini không trả về nội dung khi ping. Hãy kiểm tra model rồi thử lại.');
         if(!response.ok) throw new HttpError(400,'Gemini key hoặc model chưa dùng được. Kiểm tra quyền và tên model.');
         return {ok:true,message:`${provider==='zalo'?'Zalo Bot':'Telegram'} và Gemini đã xác thực. Phân tích ảnh thực tế vẫn phụ thuộc quota và khả năng của model.`};
       }
