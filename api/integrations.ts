@@ -6,6 +6,7 @@ import { type ApiRequest,readBody } from '../src/http.js';
 import { decryptSecret,encryptSecret,publicIntegration } from '../src/credentials.js';
 import { channelBot } from '../src/channel.js';
 import { HttpError,webRoute } from '../src/web-auth.js';
+import { analyze } from '../src/gemini.js';
 
 const inputSchema=z.object({
   id:z.uuid().optional(),name:z.string().trim().min(1).max(80),
@@ -37,6 +38,7 @@ export default async function handler(req:ApiRequest,res:ServerResponse) {
       }
       if(action==='test') {
         await messenger.call('getMe',{});
+        await analyze(null,'Một quả trứng gà luộc 50 g.',{apiKey:decryptSecret(bot.gemini_ciphertext,master,id),model:bot.gemini_model});
         const response=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${bot.gemini_model}:generateContent`,{
           method:'POST',
           body:JSON.stringify({contents:[{role:'user',parts:[{text:'Reply with OK.'}]}],generationConfig:{maxOutputTokens:64}}),

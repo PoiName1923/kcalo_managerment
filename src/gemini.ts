@@ -1,9 +1,21 @@
-import { z } from 'zod';
-import { estimateSchema, parseEstimate } from './estimate.js';
+import { parseEstimate } from './estimate.js';
+import { redact } from './logging.js';
+
+const number = { type: 'number', minimum: 0, maximum: 100000 };
+export const nutritionJsonSchema = {
+  type: 'object', required: ['is_food','items','confidence','assumptions'],
+  properties: {
+    is_food: {type:'boolean'}, confidence:{type:'string',enum:['low','medium','high']},
+    assumptions:{type:'array',maxItems:6,items:{type:'string'}},
+    items:{type:'array',maxItems:15,items:{type:'object',
+      required:['name','grams','kcal','kcal_low','kcal_high','protein_g','carbs_g','fat_g'],
+      properties:{name:{type:'string'},grams:number,kcal:number,kcal_low:number,kcal_high:number,protein_g:number,carbs_g:number,fat_g:number}}},
+  },
+};
 
 export async function analyze(image: Buffer | null, caption: string,
   config: { apiKey: string; model: string }, request: typeof fetch = fetch) {
-  const schema = z.toJSONSchema(estimateSchema);
+  const schema = nutritionJsonSchema;
   const response = await request(`https://generativelanguage.googleapis.com/v1beta/models/${config.model}:generateContent`, {
     method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': config.apiKey },
     signal: AbortSignal.timeout(75_000),
@@ -24,7 +36,11 @@ Không tư vấn giảm cân hay chẩn đoán bệnh. Tối đa 15 món và 6 g
       generationConfig: { responseMimeType: 'application/json', responseJsonSchema: schema, maxOutputTokens: 8192 },
     }),
   });
-  if (!response.ok) throw new Error(`Gemini HTTP ${response.status}`);
+  if (!response.ok) {
+    const failure=await response.json().catch(()=>null) as {error?:{status?:string;message?:string}}|null;
+    const detail=redact(String(failure?.error?.message??'Request rejected').split(config.apiKey).join('[REDACTED]')).slice(0,1500);
+    throw new Error(`Gemini HTTP ${response.status}: ${failure?.error?.status??'ERROR'}: ${detail}`);
+  }
   const body = await response.json() as { usageMetadata?: {totalTokenCount?:number}; candidates?: { finishReason?: string; content?: { parts?: { text?: string; thought?: boolean }[] } }[] };
   const candidate = body.candidates?.[0];
   if (candidate?.finishReason !== 'STOP') throw new Error('Gemini returned no complete estimate');
