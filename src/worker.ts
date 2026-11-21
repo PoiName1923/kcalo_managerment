@@ -76,14 +76,15 @@ async function processJob(job: Job, db: Database, config: Config, bot: ChatBot) 
     await bot.sendText(job.chat_id, 'Mình chưa xử lý được ảnh hoặc yêu cầu này. Bạn thử gửi lại ảnh rõ hơn hoặc thử lại sau nhé.', job.message_id);
     return;
   }
-  if (!job.payload.file_id) { await command(job, db, bot); return; }
+  const text = (job.payload.text ?? '').trim();
+  if (!job.payload.file_id && (!text || text.startsWith('/'))) { await command(job, db, bot); return; }
   const lookup=db.from('meals').select('estimate');
   const existing = checked(await (job.id ? lookup.eq('source_job_id',job.id) : lookup.eq('update_id',job.update_id)).maybeSingle());
   if (existing) { await bot.sendText(job.chat_id, formatEstimate(parseEstimate(existing.estimate)), job.message_id); return; }
-  const images = await prepareImages(await bot.photo(job.payload.file_id));
+  const images = job.payload.file_id ? await prepareImages(await bot.photo(job.payload.file_id)) : null;
   let estimate;
   try {
-    estimate = await analyze(images.analysis, job.payload.caption ?? '', { apiKey: config.GEMINI_API_KEY, model: config.GEMINI_MODEL });
+    estimate = await analyze(images?.analysis ?? null, images ? job.payload.caption ?? '' : text, { apiKey: config.GEMINI_API_KEY, model: config.GEMINI_MODEL });
     if(job.id) checked(await db.rpc('record_gemini_usage',{p_job_id:job.id,p_attempt:job.attempts,p_success:true,p_tokens:estimate.usage_tokens}));
   } catch(error) {
     if(job.id) checked(await db.rpc('record_gemini_usage',{p_job_id:job.id,p_attempt:job.attempts,p_success:false,p_tokens:0}));
@@ -91,10 +92,12 @@ async function processJob(job: Job, db: Database, config: Config, bot: ChatBot) 
   }
   let path: string | null = null;
   if (estimate.is_food) {
+    if (images) {
     path = `${job.bot_id ? job.bot_id+'/' : ''}${job.chat_id}/${job.update_id}.webp`;
     // Register before upload so a crash cannot leave an untracked image forever.
     checked(await db.from('image_assets').upsert({ object_path: path }, { onConflict: 'object_path', ignoreDuplicates: true }));
     checked(await db.storage.from('meal-images').upload(path, images.thumbnail, { contentType: 'image/webp', upsert: true }));
+    }
     checked(await db.rpc(job.id ? 'save_bot_meal' : 'save_meal', { ...(job.id ? {p_job_id:job.id} : {p_update_id:job.update_id}), p_token: job.lease_token,
       p_estimate: estimate, p_model: config.GEMINI_MODEL, p_image_path: path }));
   }
