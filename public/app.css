@@ -11,3 +11,5 @@
 @media(max-width:760px){.nav{display:grid;grid-template-columns:1fr 1fr;overflow:visible}.chart text{font-size:14px}.data-table{min-width:660px}.meal-title{min-width:160px}}
 .field input::placeholder{color:var(--muted)}
 .rail :focus-visible{outline-color:#d4e8c4}
+
+.chart-scroll{overflow-x:auto;max-width:100%}.chart-scroll .chart{height:250px;max-width:none;overflow:hidden}.chart-legend{display:flex;flex-wrap:wrap;gap:12px 20px;margin-bottom:16px}.chart-legend .legend:before{background:var(--legend-color)}.chart .segment-label{fill:white;font-size:11px}.chart .data-label{fill:var(--pine);font-size:11px;font-weight:600}.daily-table-wrap{height:320px;overflow:auto;overscroll-behavior:contain}.daily-table-wrap th{position:sticky;top:0;z-index:1}#day-detail:not(:empty){margin-top:24px;padding-top:20px;border-top:1px solid var(--line)}.day-meal{padding:16px 0;border-bottom:1px solid var(--line);color:var(--ink);overflow-wrap:anywhere}.day-meal h4{margin:0 0 8px}.day-meal ul{padding-left:20px;line-height:1.9}.day-meal p{font-size:.8rem}

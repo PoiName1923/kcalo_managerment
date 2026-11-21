@@ -81,7 +81,7 @@ Buttons share semibold labels, inline icons, and primary, bordered secondary, or
 Inputs and selects use white surfaces, a thin field border, visible labels, and muted hints. Focus changes the field border to green; retain a visible keyboard-focus indicator for all controls.
 Navigation pairs outline icons with text and uses `aria-current="page"` for the filled active state. The mobile layout retains these labels in its two-column grid.
 Panels group charts, forms, and tables. Status badges label operational states, counts, and estimate confidence with the corresponding semantic pair.
-The daily bar chart is derived from recorded kcal, includes zero-value days, and offers an expandable daily data table. Macro bars represent the recorded mass proportions, with explanatory text rather than an implied goal.
+The daily chart stacks energy converted from protein, carbohydrate (4 kcal/g each), and fat (9 kcal/g), with a legend, kcal labels, zero-value days, and horizontal scrolling. Its expandable daily table retains recorded kcal and macro grams in a fixed 320px scrolling region with sticky headers. Each day opens meal and item nutrition details, including archived records. Macro bars represent the recorded mass proportions, with explanatory text rather than an implied goal.
 
 ## Do's and Don'ts
 - **Do** reuse the pine rail, white bordered work surfaces, and Be Vietnam typography.
